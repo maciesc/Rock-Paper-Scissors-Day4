@@ -1,4 +1,6 @@
 import random
+from os import system, name
+import time
 
 rock = """
     _______
@@ -50,16 +52,34 @@ solutions = {
   (2,2): lose,
 }
 
-print("Welcome to the game rock paper scissors")
-user_choice = int(input("Type '0' for rock, '1' for paper and '2' for scissors\n"))
+def clear_console():
+   # for windows
+   if name == 'nt':
+      _ = system('cls')
 
-computer_choice = random.randint(0, 2)
+   # for mac and linux
+   else:
+     _ = system('clear')
+     
+while(True):
+  print("Welcome to the game rock paper scissors")
+  user_choice = input("Type '0' for rock, '1' for paper and 'anything else' for scissors\n")
+  if user_choice.isdigit() and 0 <= int(user_choice) <= 2:
+    user_choice = int(user_choice)
+    
+  else:
+    user_choice = 2
 
-print("Your choice\n")
-print(drawing[user_choice])
+  computer_choice = random.randint(0, 2)
 
-print("\n")
-print("Computer choice\n")
-print(drawing[computer_choice])
+  print("Your choice\n")
+  print(drawing[user_choice])
+  
+  print("\n")
+  print("Computer choice\n")
+  print(drawing[computer_choice])
 
-print(solutions.get((user_choice, computer_choice), "Please type correct value"))
+  print(solutions.get((user_choice, computer_choice), "Please type correct value"))
+  time.sleep(2)
+  clear_console()
+  
